@@ -1,4 +1,4 @@
-workspacie:
+workspace:
   base: /workspace
   path: src/github.com/bitlogic/demo-backend
 pipeline:
