@@ -1,3 +1,5 @@
+[![Build Status](http://drone.bitlogic.party/api/badges/bitlogic/demo-backend/status.svg)](http://drone.bitlogic.party/bitlogic/demo-backend)
+
 Instavote
 =========
 
@@ -22,4 +24,3 @@ Architecture
 * A .NET worker which consumes votes and stores them in…
 * A Postgres database backed by a Docker volume
 * A Node.js webapp which shows the results of the voting in real time
-
