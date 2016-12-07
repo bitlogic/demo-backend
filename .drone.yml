@@ -1,6 +1,6 @@
-workspace:
+workspacie:
   base: /workspace
-  path: src/github.com/bitlogic/devops-demo
+  path: src/github.com/bitlogic/demo-backend
 pipeline:
   publish-result:
     image: plugins/docker
