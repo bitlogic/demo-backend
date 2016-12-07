@@ -1,0 +1,20 @@
+workspace:
+  base: /workspace
+  path: src/github.com/bitlogic/devops-demo
+pipeline:
+  publish-result:
+    image: plugins/docker
+    repo: bitlogicos/demo-result
+    context: result/
+    dockerfile: result/Dockerfile
+    tag:
+    - latest
+    - "1.0.${DRONE_BUILD_NUMBER}"
+  publish-worker:
+    image: plugins/docker
+    repo: bitlogicos/demo-worker
+    context: worker/
+    dockerfile: worker/Dockerfile
+    tag:
+    - latest
+    - "1.0.${DRONE_BUILD_NUMBER}"
