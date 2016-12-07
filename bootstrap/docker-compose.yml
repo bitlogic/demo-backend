@@ -1,0 +1,77 @@
+version: "2"
+
+services:
+  balancer:
+    image: bitlogicos/demo-balancer
+    ports:
+      - "80:80"
+    depends_on:
+      - vote
+      - result  
+    networks:
+      front-tier:
+        aliases:
+          - balancer
+
+  vote:
+    image: bitlogicos/demo-vote
+    command: python app.py
+    ports:
+      - "80"
+    networks:
+      front-tier:
+        aliases:
+          - vote
+      back-tier:
+        aliases:
+          - vote
+    depends_on:
+      - db
+      - redis
+  result:
+    image: bitlogicos/demo-result
+    command: ["node",  "server.js"]
+    ports:
+      - "80"
+    networks:
+      front-tier:
+        aliases:
+          - result
+      back-tier:
+        aliases:
+          - result
+    depends_on:
+      - db
+      - redis
+
+  worker:
+    image: bitlogicos/demo-worker
+    networks:
+      - back-tier
+    depends_on:
+      - db
+      - redis
+
+  redis:
+    image: redis:alpine
+    ports: ["6379"]
+    networks:
+       back-tier:
+        aliases:
+          - redis
+
+  db:
+    image: postgres:9.4
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+    networks:
+      back-tier:
+        aliases:
+          - db
+
+volumes:
+  db-data:
+
+networks:
+  front-tier:
+  back-tier:

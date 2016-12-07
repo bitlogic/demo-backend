@@ -18,3 +18,19 @@ pipeline:
     tag:
     - latest
     - "1.0.${DRONE_BUILD_NUMBER}"
+  publish-balancer:
+    image: plugins/docker
+    repo: bitlogicos/demo-balancer
+    context: balancer/
+    dockerfile: balancer/Dockerfile
+    tag:
+    - latest
+    - "1.0.${DRONE_BUILD_NUMBER}"    
+  publish-bootstrap:
+    image: plugins/docker
+    repo: bitlogicos/demo
+    context: bootstrap/
+    dockerfile: bootstrap/Dockerfile
+    tag:
+    - latest
+    - "1.0.${DRONE_BUILD_NUMBER}"    
